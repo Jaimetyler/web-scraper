@@ -38,28 +38,27 @@ mongoose.connect("mongodb://localhost/articledb", { useNewUrlParser: true });
 
 //scraping espn.com/mma/
 app.get ('/scrape', (req,res) => {
-    axios.get('https://www.espn.com/mma/').then((response) => {
+    axios.get('https://www.digg.com/channel/technology').then((response) => {
         const $ = cheerio.load(response.data);
 
-        // $('article.contentItem').each((i, element) => {
-          $('section.contentItem').each((i, element) => {
-            let testDig = $(this).children('a').attr('href');
+        $('article.digg-story').each((i, element) => {
+             let testDig = $(this).attr('data-contenturl');
             // console.log(element);
-            console.log("test: ", testDig);
-            let result = {};
-            result.headline = $(this).find('.contentItem_titleWrapper').children('h1').text();
-            result.summary = $(this).find('.contentItem_titleWrapper').children('p').text();
-            result.link = $(this).find('a').attr('href');
-            // result.image = $(this).children('p').attr("srcset");
+              console.log("test: ", testDig);
+            // let result = {};
+            // result.headline = $(this).
+            // result.summary = $(this).
+            // result.link = $(this).
+            // // result.image = $(this).
 
-            db.Article.create(result).then((dbArticle) => {
-                // console.log(dbArticle);
-            })
-            .catch((err) => {
-                // console.log(err);
-            });
-        });
-        res.send("Scrape Comlete")
+            // db.Article.create(result).then((dbArticle) => {
+            //     // console.log(dbArticle);
+            // })
+            // .catch((err) => {
+            //     // console.log(err);
+            // });
+      });
+        res.send("Scrape Complete")
     });
 });
 
