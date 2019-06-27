@@ -46,7 +46,7 @@ mongoose.connect("mongodb://localhost/articledb", { useNewUrlParser: true });
 
 app.get('/scrape', function (req, res) {
 
-  axios.get('https://www.digg.com/channel/longreads').then((response) => {
+  axios.get('https://www.digg.com/channel/science').then((response) => {
     // const axiosRes = axios.get('https://www.digg.com/channel/technology')
 
     const $ = cheerio.load(response.data);
@@ -95,9 +95,9 @@ app.get("/headers/:id", function (req, res) {
     .then(function (dbHeader) {
       res.json(dbHeader);
     })
-    .catch(function (err) {
-      res.json(err);
-    });
+      .catch(function (err) {
+        res.json(err);
+      });
 });
 
 app.post("/headers/:id", function (req, res) {
