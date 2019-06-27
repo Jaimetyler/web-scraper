@@ -14,8 +14,12 @@ const HeaderSchema = new Schema ({
     },
 
     comment: {
-        type: Schema.Types.ObjectId,
-        ref: "Comment"
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
     }
 });
 
